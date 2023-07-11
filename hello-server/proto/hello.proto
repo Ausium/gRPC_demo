@@ -1,0 +1,33 @@
+// 使用proto3语法
+syntax = "proto3";
+
+// 生成的go文件在哪个目录哪个包中， . 表示在当前目录生成，service 代表生成的go文件的包名是service
+option go_package = ".;service";
+
+// 定义服务，其中有个方法，接收客户端参数，返回服务端响应
+service SayHello {
+  rpc SayHello(HelloRequest) returns (HelloResponse) {}
+}
+
+service Sing {
+  rpc Sing(SingRequest) returns (SingResponse) {}
+}
+
+message SingRequest {
+  string SingReqName = 1;
+}
+
+message SingResponse {
+  string SingRespName = 1;
+}
+
+// 对应golang里面的结构体
+// 这里面的 “赋值” 代表这个变量在这个 message 中的位置
+message HelloRequest {
+  string requestName = 1;
+  repeated int64 age = 2;
+}
+
+message HelloResponse {
+  string responseMsg = 1;
+}
